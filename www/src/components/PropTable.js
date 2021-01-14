@@ -219,6 +219,7 @@ class PropTable extends React.Component {
 
 export const metadataFragment = graphql`
   fragment Description_markdown on ComponentDescription {
+    text
     childMarkdownRemark {
       html
     }

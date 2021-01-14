@@ -253,6 +253,12 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
     .trim()
     .replace(/>;$/, '>');
 
+  const storyBookCode = `(args: any) => {\n${
+    codeText.includes('render(')
+      ? code.replace(/render\((.*)\)/gm, 'return $1')
+      : `return ${code}`
+  }\n};`;
+
   return (
     <StyledContainer>
       <LiveProvider
@@ -264,6 +270,7 @@ function Playground({ codeText, exampleClassName, showCode = true }) {
         <Preview showCode={showCode} className={exampleClassName} />
         {showCode && <Editor />}
       </LiveProvider>
+      <pre>{storyBookCode}</pre>
     </StyledContainer>
   );
 }
